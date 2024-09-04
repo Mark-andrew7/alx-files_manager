@@ -24,6 +24,17 @@ class UsersController {
 
     return res.status(201).json({ email, id: result.insertedId });
   }
+
+  static async getMe(req, res) {
+    const token = req.headers['x-token']
+    const key = `auth_${token}`
+
+    const userId = await redisClient.get(key);
+
+    if (!userId) {
+      return res.status(401).json({ error: 'Unathourized'})
+    }
+  }
 }
 
 module.exports = UsersController;
