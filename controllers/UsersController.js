@@ -34,6 +34,14 @@ class UsersController {
     if (!userId) {
       return res.status(401).json({ error: 'Unathourized'})
     }
+
+    const user = await dbClient.db.collection('users').findOne({ _id: new dbClient.ObjectId(userId) });
+
+    if (!user) {
+      return res.status(401).json({ error: 'Unathourized'})
+    }
+
+    return res.status(200).json({ email: user.email, id: user._id });
   }
 }
 
