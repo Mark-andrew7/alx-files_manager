@@ -25,7 +25,7 @@ class AuthController {
     return res.status(200).json({ token });
   }
 
-  static async getdisconnect(req, res) {
+  static async getDisconnect(req, res) {
     const token = req.headers['x-token'] ;
     const key = `auth_${token}`;
 
@@ -40,3 +40,5 @@ class AuthController {
     return res.status(204).send();
   }
 }
+
+module.exports = AuthController;
